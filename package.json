@@ -1,0 +1,23 @@
+{
+  "name": "scl007-hackathon-peliculas",
+  "version": "1.0.0",
+  "description": "Proyecto primera hackaton",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "*",
+    "mysql": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RaquelCC/SCL007-hackathon-peliculas.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RaquelCC/SCL007-hackathon-peliculas/issues"
+  },
+  "homepage": "https://github.com/RaquelCC/SCL007-hackathon-peliculas#readme"
+}
