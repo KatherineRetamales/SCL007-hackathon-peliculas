@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "express": "*",
-    "mysql": "^2.16.0"
+    "mysql": "^2.16.0",
+    "require": "^2.4.20"
   },
   "repository": {
     "type": "git",

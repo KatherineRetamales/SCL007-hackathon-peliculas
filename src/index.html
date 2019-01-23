@@ -3,32 +3,74 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Hackaton Peliculas</title>
 </head>
 
 <body>
-    <h1 id="prueba"></h1>
-    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
-    <script>
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyAoU4JD6kDXYkkQee2Apsp6m1ZsZ4lAjjk",
-            authDomain: "hackaton-c94c4.firebaseapp.com",
-            databaseURL: "https://hackaton-c94c4.firebaseio.com",
-            projectId: "hackaton-c94c4",
-            storageBucket: "hackaton-c94c4.appspot.com",
-            messagingSenderId: "353777861027"
-        };
-        firebase.initializeApp(config);
-        let prueba = document.getElementById('prueba');
-        let data = firebase.database().ref().child('usuario');
-        data.on('value', snap => prueba.innerHTML = snap.val());
-        var obj = {
-            clave: "2011",
-            usuario:"Harry Potter"
-        };
-        ref.update(obj);
-    </script>
-</body>
+    <nav>
+        <div class="nav-wrapper black">
+            <a href="#" class="brand-logo">FilmShare</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a id="sign-up-menu" data-target="modal2" class="modal-trigger">Sign Up</a></li>
+                <li><a id="login-menu" data-target="modal1" class="modal-trigger">Log In</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <div class="container">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="user-mail" type="text" class="validate" placeholder="Ingrese su correo electrónico..">
+            </div>
+            <div class="container">
+                <input id="user-password" type="password" class="validate" placeholder="Ingrese su contraseña..">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="login-btn" class="modal-close waves-effect waves-green btn">Log In</button>
+        </div>
+    </div>
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <div class="container">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="new-user-mail" type="text" class="validate" placeholder="Ingrese su correo electrónico..">
+            </div>
+            <div class="container">
+                <input id="new-user-password" type="password" class="validate" placeholder="Ingrese su contraseña..">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="sign-up-btn" class="modal-close waves-effect waves-green btn">Sign Up</button>
+        </div>
+    </div>
+    <div id="root">
 
+    </div>
+    <div id="movies" class="row container">
+    
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
+    <script src="index.js"></script>
+</body>
 
 </html>
