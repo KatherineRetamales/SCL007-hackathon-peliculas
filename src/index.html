@@ -7,6 +7,9 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style1.css">
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <title>Hackaton Peliculas</title>
 </head>
 
@@ -51,10 +54,27 @@
     <div id="root">
 
     </div>
-    <div id="movies" class="row container">
+    <!----<div id="movies" class="row container">
     
 
-    </div>
+    </div>-->
+        <div class="row">
+            <div class="col s6">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="new-user-mail" type="text" class="validate" placeholder="¿Que nombre quieres ponerle a la lista?">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">add</i>
+                        <input type="text" id="autocomplete-input" class="autocomplete">
+                        <label for="autocomplete-input">¿Que pelicula quieres agregar?</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="check_list"></div>
+        </div>
 
 
 
