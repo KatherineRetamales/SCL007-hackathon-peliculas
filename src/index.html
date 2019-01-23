@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <h1 id="prueba"></h1>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAoU4JD6kDXYkkQee2Apsp6m1ZsZ4lAjjk",
+            authDomain: "hackaton-c94c4.firebaseapp.com",
+            databaseURL: "https://hackaton-c94c4.firebaseio.com",
+            projectId: "hackaton-c94c4",
+            storageBucket: "hackaton-c94c4.appspot.com",
+            messagingSenderId: "353777861027"
+        };
+        firebase.initializeApp(config);
+        let prueba = document.getElementById('prueba');
+        let data = firebase.database().ref().child('usuario');
+        data.on('value', snap => prueba.innerHTML = snap.val());
+        var obj = {
+            clave: "2011",
+            usuario:"Harry Potter"
+        };
+        ref.update(obj);
+    </script>
+</body>
+
+
+</html>
