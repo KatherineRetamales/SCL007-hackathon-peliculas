@@ -11,9 +11,17 @@ document.addEventListener("DOMContentLoaded", event => {
       firebase.initializeApp(config);
     const app = firebase.app();
 
+    const database = firebase.database();
+
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
           // User is signed in.
+          database.ref("users/"+firebase.auth().currentUser.uid).once('value', function(snapshot) {
+            if(snapshot.val() === null) {
+                saveNewUser();
+            }
+        })
+
         document.getElementById("new-user-mail").value = "";
         document.getElementById("new-user-password").value = "";
         document.getElementById("user-mail").value = "";
@@ -59,19 +67,25 @@ document.addEventListener("DOMContentLoaded", event => {
             var errorCode = error.code;
             var errorMessage = error.message;
             // ...
+            
         });
         
+        
     })
+
+    function saveNewUser(){
+        database.ref("users/"+firebase.auth().currentUser.uid).set({
+            email: firebase.auth().currentUser.email
+        })
+    }
 
     let pageCounter = 0;
     do {
         pageCounter++;
-        console.log(document.getElementsByClassName("movie-card").length)
         fetch("https://api.themoviedb.org/3/discover/movie?api_key=48819a4f88e3d597df63bebab6723d0f&primary_release_year=2019&page="+pageCounter)
             .then(data => data.json())
             .then(data => {
                 let dataMovies = data.results;
-                console.log(data)
                 dataMovies.forEach(movie => {
                     let title = movie.title;
                     fetch("http://www.omdbapi.com/?t="+title+"&y=2019&apikey=9513ffad")
