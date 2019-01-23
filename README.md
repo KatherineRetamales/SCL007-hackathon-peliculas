@@ -1,96 +1,39 @@
-# "Hackathon" de final de _Common Core_, películas
+## HISTORIAS DE USUARIO
 
- ## Índice
+### MERCEDES
 
- * [Preámbulo](#preámbulo)
-* [Resumen del proyecto](#resumen-del-proyecto)
-* [Consideraciones generales](#consideraciones-generales)
-* [Objetivos de aprendizaje](#objetivos-de-aprendizaje)
-* [Parte obligatoria](#parte-obligatoria)
-* [Consideraciones técnicas](#consideraciones-técnicas)
+Mercedes, de 34 años, ha sido siempre fan del cine. Desde el colegio siempre se ha hecho tiempo para, al menos 1 vez a la semana, ir al cine a ver alguna pelicula de estreno, esto le ha permitido estar siempre al día en cuanto al mundo cinematográfico. Desde el inicio de este año ha estado sobrecargada de tareas en su trabajo, lo cual le ha impedido contonuar con su ritual de peliculas semanales y ha perdido la cuenta de qué peliculas le quedan pendientes para ver. A Mercedes le gustaría poder ayudarse a recordar qué peliculas ya ha visto y que peliculas tiene pendientes, para organizar mejor el poco tiempo disponible que tiene ultimamwente.
 
- ***
+**Como:** Mercedes, como fanática del cine.
 
- ## Preámbulo
+**Qué:** Quiere una aplicación que le permita llevar la cuenta de qué peliculas ha visto y qué peliculas le falta ver.
 
- Con la aparición de plataformas para ver películas en la nube, como Netflix o
-Hulu, ver películas desde donde estés, comiendo lo que quieras
-(sin tener que pagar precios ridículos por pop-corn / pipoca / palomitas /
-canchita / cabritas), parando si es necesario, teniendo acceso a una cantidad
-abrumadora de películas... ha cambiado la experiencia del usuario
-y modificado el mercado de las películas a nivel global.
+**Por qué:** Porque ya no tiene tiempo de ir siempre al cine y se le hace dificil llevar la cuenta de las peliculas que quiere ver.
 
- ![Pelis](https://media.giphy.com/media/NipFetnQOuKhW/giphy.gif)
+#### DEFINICIÓN DE TERMINADO
 
- ## Resumen del proyecto
+- Que la página muestre una base de datos de peliculas.
+- Que la página muestre las peliculas a estrenarse durante el año en curso.
+- Que la página permita identificar al usuario.
+- Que la página permita al usuario crear una lista de peliculas pendientes para ver.
+- Que la página permita al usuario crear una lista de peliculas ya vistas.
 
- Durante estos días crearás el producto que tú quieras alrededor del mundo
-de las películas. Puede ser un sitio que hable de las mejores películas
-latinoamericanas, uno que recomiende las películas recién estrenadas en Netflix,
-uno de pelis de terror... o... ¡lo que quieras!
+### CARMEN (*"Hacker Edition"*)
+Carmen, de 25 años, no es particularmente fanática de las películas. De lo que **si** es una **gran fan** es de las tardes con sus amigas en las cuales se juntan a conversar y ver peliculas. Generalmente planifican con anticipación, coordinan un día, quien llevara cada cosa, en casa de quien se juntarán, etc.
+Ultimamente han tenido problemas para decidir qué película verán, y les gustaría una plataforma que les **permitiera a todas estar sintonizadas con las propuestas de las demas** para así decidir la pelicula que verán en cada ocasión.
 
- ## Consideraciones generales
+**Como:** Carmen, como persona socialmente activa que le gusta pasar el tiempo con sus amigas viendo películas.
 
- * Este proyecto se debe resolver en equipos de hasta 4 personas.
-* Usa la API de [OMDB](http://www.omdbapi.com/) (The Open Movie Database).
-* Tiempo para completar el reto: 4 días.
-* Habrán dos presentaciones, una a la mitad de la _hackathon_ y otra al final.
+**Qué:** Quiere una aplicación que le permita a ella y sus amigas coordinar con facilidad que película veran cuando se junten.
 
- ## Objetivos de aprendizaje
+**Por qué:** Porque ultimamente les ha costado mucho coordinar y decidir qué pelicula verán.
 
- * Enfrentarte a un reto de corta duración en el que pongas en práctica todo
-lo aprendido hasta ahora.
-* Que sigas desarrollando tus habilidades de trabajo en equipo. Mientras más
-personas en un equipo de trabajo, mayor complejidad para: tener un entendimiento
-común, seguir el flujo de trabajo, buscar consensos, etc.
+#### DEFINICIÓN DE TERMINADO
 
- ## Parte Obligatoria
-
- * Todo el planeamiento del trabajo deberá ser detallado en un repositorio único
-por _squad_ en el que se presente el _planning_, el _research_, los _sketches_
-y las inspiraciones utilizadas para definir el producto.
-* Además, deberás detallar en el archivo _readme_, qué hizo cada una en el
-proyecto.
-* El producto deberá presentarse publicado en github pages.
-
- ## Consideraciones técnicas
-
- * El diseño visual de los componentes es de libre elección de las estudiantes,
-sin embargo, si no quieren crearlo desde cero, pueden utilizar el que
-propuso [Walmart](https://drive.google.com/file/d/0B6GBtl-gO6LwaVprQkFqTGI2a28/view).
-* Deberán usar al menos un framework de css.
-
-## Reglas de las presentaciones: 
-* Cada squad tendrá 5 minutos para presentar su demo y 5 minutos para recibir preguntas. 
-
-* Las personas que presentan en la primera presentación no deben ser las mismas de la presentación final 
-
-
-## Horario
-
-|       |  Martes           | Miércoles                    | Jueves                        | Viernes                               |
-|------ | ------------------| ---------------------------- | ----------------------------- | ------------------------------------- |
-| 8:00  | Kick off hackaton | Daily por squad              | Daily por squad               | Detalles finales                      |
-| 9:00  | Sesión de planificación  | Hackeo                       | Hackeo                        |                                       |
-| 10:00 | Hackeo            | Compartir link de aplicación | Inscripción de aplicaciones   | Feria de demostraciones               |
-| 11:00 |                   | Presentación y Feedback      |                               | Presentación de mejores squads        |
-| 12:00 |                   |                              |                               |                                       |
-|>13:00 |                   |                              |                               | Deliberación del jurado               |
-| 20:00 |                   |                              | Cierre de inscripciones       |                                       |
-
-## Tips para la organización de trabajo entre UX y Front end 
-
-* Las UX y FE entienden en conjunto el reto en el que van a trabajar, se organizan y arman sus primeros bocetos.
-* Con los primeros bocetos/ideas, las FE pasan a crear su ambiente de desarrollo y a crear componentes atómicos que luego les sea fácil personalizar con CSS y utilizar para crear interfaces más complejas. Además, las FE empiezan también a trabajar en la lógica de la aplicación. Mientras tanto, las UX crean una guía de estilos, los flujos de usuarios, hacen un prototipo más completo y lo testean.
-* Las UX comparten el prototipo testeado, para que el equipo empiece a personalizar los componentes y a ponerlos en conjunto.
-* Las UX hacen QA y testing con los releases que vayan haciendo las FE.
-* Planifiquen, historias de usuario y definition of done son importantísimos.
-* Usen las ceremonias ágiles para saber en que van como equipo, dailys y retrospectivas diarias son esenciales.
-* Iteren, iteren, iteren.
-
-## ¿Qué es la Feria de demos?
-
-La feria de demos se realizará el día de las presentaciones, consiste en la dinámica de “speed dating”, cada squad presentará su demo durante 3 minutos a un grupo de personas, entre ellos los jurados de la Hackathon. Luego de los 3 minutos sonará una chicharra y el grupo de personas rotará al siguiente squad, de esta forma deberán presentar durante una hora. 
-
-* Las demos no deben durar más de 3 minutos y deben mostrar el producto y las tecnologías usadas.
-* Los asistentes van a votar por los 5 equipos finalistas, quienes tendrán la oportunidad de hacer su demo a todo el público para poder elegir un ganador. 
+- Que la página muestre una base de datos de peliculas.
+- Que la página permita buscar una película en particulas.
+- Que la página muestre información sobre la pelicula como el año, sinopsis, director y actores.
+- Que la página permita crearse un usuario.
+- Que al usuario se le permita crear una lista de peliculas y compartirla en modo público o privado (solo determinadas personas).
+- Que la página permita a las personas que pueden ver una lista de peliculas privada votar por una de ellas, para ver cual es la más popular.
+- Que la página guarde un recuento de (pelicula que ha ganado una votación & pelicula por la que votaste)/ total de peliculas.
