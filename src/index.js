@@ -318,11 +318,15 @@ document.addEventListener("DOMContentLoaded", event => {
     }
 
     document.getElementById("user-lists").addEventListener("click", ()=> {
-        let promise = [(firebase.database().ref("users/"+firebase.auth().currentUser.uid).once('value', function(snapshot){
+        
+       let promise = [(firebase.database().ref("users/"+firebase.auth().currentUser.uid).once('value', function(snapshot){
             window.snap = snapshot.val();
             
         }))]
-        Promise.all(promise).then(()=> {
+        Promise.all(promise).then(()=>{
+
+        
+
             document.getElementById("succesful-message").style.display = "none";
             document.getElementById("legend").style.display = "none";
             document.getElementById("movies").style.display = "none";
@@ -334,14 +338,50 @@ document.addEventListener("DOMContentLoaded", event => {
             <div class="col s12">
             <h4>${window.snap.userName},</h4>
             <h5>tienes las siguientes listas creadas:</h5>
-            
+            <ul id="lists-here">
+
+            </ul>
     
             </div>
+            <button id="view-lists" class="btn red">Pulsa para ver tus listas</button>
             `
 
+            document.getElementById("view-lists").addEventListener("click", userLists)
         })
 
-    })
+        
+
+            
+        
+
+        
+
+        })
+    
+
+    
+    
+    function userLists() {
+        let currentLists = [];
+        let promise = [(database.ref("users/"+firebase.auth().currentUser.uid).orderByKey().on("value", function(snapshot) {
+            let postIds = Object.keys(snapshot.val().movieLists)
+            postIds.forEach(id =>{
+                currentLists.push(snapshot.child("movieLists").child([id]).val())
+            })
+          }))]
+          Promise.all(promise).then(
+              currentLists.forEach(list => {
+                  console.log(list)
+                  document.getElementById("lists-here").innerHTML += `
+                  <li>${Object.keys(list)}</li>
+                  `
+              })
+
+          )
+
+
+
+    }
 
     document.getElementById("logo").addEventListener("click", () => {
         window.location.reload();
