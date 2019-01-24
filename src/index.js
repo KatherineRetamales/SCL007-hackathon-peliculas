@@ -311,7 +311,7 @@ document.addEventListener("DOMContentLoaded", event => {
                     userHobbies: userHobbies
                 }))]
                 Promise.all(promise).then(() => {
-                    document.getElementById("account-settings").innerHTML = "Información actualizada."
+                    document.getElementById("account-settings").innerHTML = `Información actualizada.<i class="material-icons medium red-text">check</i>`
                 })
             })
         })
