@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", event => {
     let activeUser;
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-<<<<<<< HEAD
           // User is signed in.
           database.ref("users/"+firebase.auth().currentUser.uid).once('value', function(snapshot) {
             if(snapshot.val() === null) {
@@ -60,43 +59,6 @@ document.addEventListener("DOMContentLoaded", event => {
         document.getElementById("user-mail").value = "";
         document.getElementById("user-password").value = "";
         // document.getElementById("root").innerHTML = ""
-=======
-            // User is signed in.
-            database.ref("users/" + firebase.auth().currentUser.uid).once('value', function (snapshot) {
-                if (snapshot.val() === null) {
-                    saveNewUser();
-                }
-            })
-            initialPage();
-            document.getElementById("nav-logout").style.display = "none";
-            document.getElementById("nav-login").style.display = "block";
-            document.getElementById("new-user-mail").value = "";
-            document.getElementById("new-user-password").value = "";
-            document.getElementById("user-mail").value = "";
-            document.getElementById("user-password").value = "";
-            // document.getElementById("root").innerHTML = `<p>Hola ${user.email}</p>
-
-            //   `
-            document.getElementById("logout").addEventListener("click", () => {
-                firebase.auth().signOut().then(function () {
-                    // Sign-out successful.
-                }).catch(function (error) {
-                    // An error happened.
-                });
-            })
-        } else {
-            // No user is signed in.
-            initialPage();
-            document.getElementById("legend").style.display = "block";
-            document.getElementById("nav-logout").style.display = "block";
-            document.getElementById("list-create-section").style.display = "none";
-            document.getElementById("nav-login").style.display = "none";
-            document.getElementById("new-user-mail").value = "";
-            document.getElementById("new-user-password").value = "";
-            document.getElementById("user-mail").value = "";
-            document.getElementById("user-password").value = "";
-            // document.getElementById("root").innerHTML = ""
->>>>>>> 68d38464fadc2c72c163abb7facf1cb82ff12e0e
         }
     });
 
@@ -174,13 +136,7 @@ document.addEventListener("DOMContentLoaded", event => {
                 createLinks(movieLinks);
             })
     }
-<<<<<<< HEAD
-            
-    //  initialPage();       
-=======
->>>>>>> 68d38464fadc2c72c163abb7facf1cb82ff12e0e
-
-    // initialPage();       
+     
 
     document.getElementById("search").addEventListener("click", mainSearch)
     function mainSearch() {
@@ -239,43 +195,7 @@ document.addEventListener("DOMContentLoaded", event => {
             searchMovies("search-list-section", "movies2")
             document.getElementById("movies").style.display = "block";
         }
-<<<<<<< HEAD
-        
-        // let title = document.getElementById("search-list-section").value;
-=======
-
-        let title = document.getElementById("search-list-section").value;
->>>>>>> 68d38464fadc2c72c163abb7facf1cb82ff12e0e
-        // console.log(title);
-        // fetch("https://cors-anywhere.herokuapp.com/http://www.omdbapi.com/?t=" + title + "&plot=full&y=2019&apikey=c39cba8d") //9513ffad
-        //     .then(data => data.json())
-        //     .then(data => {
-        //         if (data.Response === "False") {
-        //             return;
-        //         }
-        //         if (data.Poster === "N/A") {
-        //             return;
-        //         }
-        //         document.getElementById("check_list").innerHTML += `
-        //         <div class="col s12 m7">
-        //             <div class="card horizontal">
-        //             <div class="card-image">
-        //                  <img  src="${data.Poster}"> 
-        //             </div>
-        //             <div class="card-stacked">
-        //                 <div class="card-content">
-        //                      <span class="card-title">${data.Title}</span>
-        //                      <p>${data.Plot}</p>
-        //                 </div>
-        //                 <div class="card-action">
-        //                 <a href="#">Agregar a mi lista</a>
-        //                 </div>
-        //             </div>
-        //             </div>
-        //         </div>
-        //         `
-        //     })
-
+    
     })
 
 
@@ -332,16 +252,10 @@ document.addEventListener("DOMContentLoaded", event => {
             let saveList = [(database.ref("users/" + firebase.auth().currentUser.uid + "/movieLists").push({
                 [listName]: moviesAddArray
             }))]
-<<<<<<< HEAD
             Promise.all(saveList).then(()=>{
             document.getElementById("succesful-message").style.display = "block";
             document.getElementById("succesful-message").innerHTML = "Lista creada."
         })
-=======
-            Promise.all(saveList).then(() => {
-                document.getElementById("list-create-section").innerHTML = "Lista creada."
-            })
->>>>>>> 68d38464fadc2c72c163abb7facf1cb82ff12e0e
         })
 
     })
@@ -352,13 +266,8 @@ document.addEventListener("DOMContentLoaded", event => {
             window.snap = snapshot.val();
 
         }))]
-<<<<<<< HEAD
         Promise.all(promise).then(()=>{
             document.getElementById("succesful-message").style.display = "none";
-=======
-        Promise.all(promise).then(() => {
-
->>>>>>> 68d38464fadc2c72c163abb7facf1cb82ff12e0e
             document.getElementById("legend").style.display = "none";
             document.getElementById("movies").style.display = "none";
             document.getElementById("movies-individual").style.display = "none";
