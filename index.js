@@ -391,8 +391,9 @@ document.addEventListener("DOMContentLoaded", event => {
     let moviesAddArray = [];
     // boton agregar pelicula
     document.getElementById("add-movie-btn").addEventListener("click", ()=>{
-        moviesAddArray.push(moviesShown.Title)
-        console.log(moviesAddArray)
+        moviesAddArray.push(moviesShown[0].Title)
+       
+        
     })
 
 
