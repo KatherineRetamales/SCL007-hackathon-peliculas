@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", event => {
     const app = firebase.app();
 
     const database = firebase.database();
-
+    let activeUser;
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
           // User is signed in.
@@ -38,9 +38,9 @@ document.addEventListener("DOMContentLoaded", event => {
         document.getElementById("new-user-password").value = "";
         document.getElementById("user-mail").value = "";
         document.getElementById("user-password").value = "";
-        document.getElementById("root").innerHTML = `<p>Hola ${user.email}</p>
+        // document.getElementById("root").innerHTML = `<p>Hola ${user.email}</p>
     
-          `
+        //   `
         document.getElementById("logout").addEventListener("click", ()=> {
             firebase.auth().signOut().then(function() {
                 // Sign-out successful.
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", event => {
         document.getElementById("new-user-password").value = "";
         document.getElementById("user-mail").value = "";
         document.getElementById("user-password").value = "";
-        document.getElementById("root").innerHTML = ""
+        // document.getElementById("root").innerHTML = ""
         }
       });
     
@@ -240,7 +240,9 @@ document.addEventListener("DOMContentLoaded", event => {
     document.getElementById("create-list").addEventListener("click", ()=> {
         document.getElementById("legend").style.display = "none";
         document.getElementById("movies").style.display = "none";
+        document.getElementById("account-settings").style.display = "none";
         document.getElementById("movies-individual").style.display = "none";
+        document.getElementById("list-create-section").style.display = "block";
         document.getElementById("list-create-section").innerHTML = `
         <div class="col s12">
         <input id="list-name" type="text" placeholder="Nombre de la Lista..">
@@ -251,7 +253,7 @@ document.addEventListener("DOMContentLoaded", event => {
         document.getElementById("new-list").addEventListener("click", ()=> {
             console.log("funciona boton listas")
             let listName = document.getElementById("list-name").value
-            let saveList = [(database.ref("users/"+firebase.auth().currentUser.uid+"/movieLists").update({
+            let saveList = [(database.ref("users/"+firebase.auth().currentUser.uid+"/movieLists").push({
                 [listName]: "a"
             }))]
             Promise.all(saveList).then(()=>{
@@ -261,8 +263,64 @@ document.addEventListener("DOMContentLoaded", event => {
         
     })
 
+    document.getElementById("settings-btn").addEventListener("click", settingsPage)
+    function settingsPage () {
+        let promise = [(firebase.database().ref("users/"+firebase.auth().currentUser.uid).once('value', function(snapshot){
+            window.snap = snapshot.val();
+            
+        }))]
+        Promise.all(promise).then(()=>{
 
+            document.getElementById("legend").style.display = "none";
+            document.getElementById("movies").style.display = "none";
+            document.getElementById("movies-individual").style.display = "none";
+            document.getElementById("list-create-section").style.display = "none";
+            document.getElementById("account-settings").style.display = "block";
+            document.getElementById("account-settings").innerHTML = `
+            <div class="col s12">
+            <h3>Información de la Cuenta</h3>
+            </div>
+            <div class="col s3">
+            <p>Email</p>
+            </div>
+            <div class="col s9">
+            <input class="settings-info" disabled value="${firebase.auth().currentUser.email}">
+            </div>
+            <div class="col s3">
+            <p>Nombre de Usuario</p>
+            </div>
+            <div class="col s9">
+            <input id="username" class="settings-info" value="${window.snap.userName ? window.snap.userName : firebase.auth().currentUser.email}">
+            </div>
+            <div class="col s3">
+            <p>Intereses</p>
+            </div>
+            <div class="col s9">
+            <textarea id="hobbies" rows="20" class="settings-info" placeholder="Describenos tus intereses.."></textarea>
+            </div>
+            <div class="co s12 center">
+            <button class="btn red" id="save-settings">Guardar Cambios</button>
+            </div>
+            `
     
+            document.getElementById("save-settings").addEventListener("click", ()=> {
+                let userName = document.getElementById("username").value;
+                let userHobbies = document.getElementById("hobbies").value;
+                let promise = [(database.ref("users/"+firebase.auth().currentUser.uid).update({
+                    userName: userName,
+                    userHobbies: userHobbies
+                }))]
+                Promise.all(promise).then(()=>{
+                    document.getElementById("account-settings").innerHTML = "Información actualizada."
+                })
+            })
+        })
+    }
+
+
+    document.getElementById("logo").addEventListener("click", ()=>{
+        window.location.reload();
+    })
 
 
 
@@ -272,4 +330,6 @@ document.addEventListener("DOMContentLoaded", event => {
 
 })
 
+let snap;
+window.snap = snap;
 
