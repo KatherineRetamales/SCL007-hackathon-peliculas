@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", event => {
                 saveNewUser();
             }
         })
+        initialPage();
         document.getElementById("nav-logout").style.display = "none";
         document.getElementById("nav-login").style.display = "block";
         document.getElementById("new-user-mail").value = "";
@@ -50,6 +51,7 @@ document.addEventListener("DOMContentLoaded", event => {
           })
         } else {
           // No user is signed in.
+          initialPage();  
         document.getElementById("legend").style.display = "block";
         document.getElementById("nav-logout").style.display = "block";
         document.getElementById("list-create-section").style.display = "none";
@@ -101,7 +103,8 @@ document.addEventListener("DOMContentLoaded", event => {
         })
     }
    
-    
+    function initialPage() {
+        document.getElementById("movies").innerHTML = "";
         fetch("https://api.themoviedb.org/3/discover/movie?api_key=48819a4f88e3d597df63bebab6723d0f&primary_release_year=2019")
         .then(data => data.json())
         .then(data => {
@@ -143,16 +146,18 @@ document.addEventListener("DOMContentLoaded", event => {
                 createLinks(movieLinks);
             })
             
+
+    }
             
-            
+     initialPage();       
 
     
 
     document.getElementById("search").addEventListener("click", mainSearch)
     function mainSearch(){
-        searchMovies("search-input")
+        searchMovies("search-input", "movies")
     }
-    function searchMovies(searchField) {
+    function searchMovies(searchField, displayDiv) {
         let promises = [];
         document.getElementById("account-settings").style.display = "none";
         document.getElementById("legend").style.display = "none";
@@ -173,7 +178,7 @@ document.addEventListener("DOMContentLoaded", event => {
                                 }
                                 moviesShown = [];
                                 moviesShown.push(data)
-                                document.getElementById("movies").innerHTML += `
+                                document.getElementById(displayDiv).innerHTML += `
                                     <div class="col s12 m4 movie-card">
                                         <div class="card small center-align white">
                                             <div class="card-content white-text">
@@ -220,7 +225,7 @@ document.addEventListener("DOMContentLoaded", event => {
     
     document.getElementById("search-list-section").addEventListener("keypress", (e) => {
         if (e.keyCode === 13){
-            searchMovies("search-list-section")
+            searchMovies("search-list-section", "movies2")
             document.getElementById("movies").style.display = "block"; 
         }
         document.getElementById("check_list").innerHTML = "";
@@ -297,6 +302,8 @@ document.addEventListener("DOMContentLoaded", event => {
     }
 
     document.getElementById("create-list").addEventListener("click", ()=> {
+        // document.getElementById("add-movie").style.display = "block";
+        moviesAddArray = [];
         document.getElementById("legend").style.display = "none";
         document.getElementById("movies").style.display = "none";
         document.getElementById("account-settings").style.display = "none";
@@ -381,7 +388,12 @@ document.addEventListener("DOMContentLoaded", event => {
     document.getElementById("logo").addEventListener("click", ()=>{
         window.location.reload();
     })
-
+    let moviesAddArray = [];
+    // boton agregar pelicula
+    document.getElementById("add-movie-btn").addEventListener("click", ()=>{
+        moviesAddArray.push(moviesShown.Title)
+        console.log(moviesAddArray)
+    })
 
 
 
