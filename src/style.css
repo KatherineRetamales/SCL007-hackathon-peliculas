@@ -23,7 +23,7 @@ a.dropdown-trigger:focus {
     outline: none;
 }
 
-#nav-logout, #nav-login, #list-create-section, #account-settings {
+#nav-logout, #nav-login, #list-create-section, #account-settings, #add-movie {
     display: none;
 }
 
@@ -64,4 +64,20 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
 textarea#hobbies.settings-info:focus {
     outline: none;
     border: 1px solid red;
+}
+
+.input-field .prefix ~ label {
+    margin-left: 0;
+}
+
+i.material-icons.small.prefix {
+    right: 0;
+}
+
+.input-field .prefix ~ input {
+    margin-left: 0;
+}
+
+.top-margin {
+    margin-top: 50px;
 }
