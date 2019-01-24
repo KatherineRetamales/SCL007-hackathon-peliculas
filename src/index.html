@@ -7,19 +7,41 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="style1.css">
-    <!--Import jQuery before materialize.js-->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <title>Hackaton Peliculas</title>
+    <title>FilmShare</title>
+
+   <!--Import jQuery before materialize.js-->
+    <!--<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>-->
+
 </head>
 
 <body>
     <nav>
         <div class="nav-wrapper black">
-            <a href="#" class="brand-logo">FilmShare</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <a href="#" id="logo" data-tooltip="Volver al Inicio" data-position="bottom" class="brand-logo tooltipped">FilmShare</a>
+            <ul id="nav-logout" class="right">
                 <li><a id="sign-up-menu" data-target="modal2" class="modal-trigger">Sign Up</a></li>
                 <li><a id="login-menu" data-target="modal1" class="modal-trigger">Log In</a></li>
+            </ul>
+            <ul id="nav-login" class="right">
+                <li><a class="dropdown-trigger" data-target='dropdown3'>Listas</a></li>
+                <ul id='dropdown3' class='dropdown-content'>
+                        <li><a>Mis Listas</a></li>
+                        <li><a id="create-list">Crear Lista</a></li>
+                    </ul>
+                <li><a class='dropdown-trigger' href='#' data-target='dropdown1'><i class="material-icons prefix">account_circle</i></a></li>
+                <ul id='dropdown1' class='dropdown-content'>
+                    <li><a>Friends</a></li>
+                    <li><a id="settings-btn">Settings</a></li>
+                </ul>
+                <li><a id="logout">Log Out</a></li>
+            </ul>
+            <ul class="right">
+                <li><a class='dropdown-trigger' href='#' data-target='dropdown2'>Buscar</a></li>
+                <ul id='dropdown2' class='dropdown-content'>
+                    <li><input id="search-input" type="text" Placeholder="Titulo de la palicula..">
+                    <button id="search" class="btn red">Buscar</button>
+                    </li>
+                </ul>
             </ul>
         </div>
     </nav>
@@ -34,7 +56,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button id="login-btn" class="modal-close waves-effect waves-green btn">Log In</button>
+            <button id="login-btn" class="modal-close waves-effect waves-green btn red">Log In</button>
         </div>
     </div>
     <div id="modal2" class="modal">
@@ -48,17 +70,25 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button id="sign-up-btn" class="modal-close waves-effect waves-green btn">Sign Up</button>
+            <button id="sign-up-btn" class="modal-close waves-effect waves-green btn red">Sign Up</button>
         </div>
     </div>
     <div id="root">
 
     </div>
-    <!----<div id="movies" class="row container">
+
+    <div class="row container center" id="legend">
+        <h5>Este 2019, las mejores peliculas...</h5>
+    </div>
+    <div id="movies" class="row container">
     
 
-    </div>-->
-        <div class="row">
+    </div>
+    <div id="movies-individual" class="container row">
+
+    </div>
+
+      <!--  <div class="row">
             <div class="col s6">
                 <div class="row">
                     <div class="input-field col s12">
@@ -74,8 +104,13 @@
                 </div>
             </div>
             <div class="row" id="check_list"></div>
-        </div>
+        </div>-->
+    <div id="list-create-section" class="container row">
 
+    </div>
+    <div id="account-settings" class="container row">
+
+    </div>
 
 
 
@@ -94,3 +129,4 @@
 </body>
 
 </html>
+
