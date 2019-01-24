@@ -225,6 +225,7 @@ document.addEventListener("DOMContentLoaded", event => {
     
     document.getElementById("search-list-section").addEventListener("keypress", (e) => {
         if (e.keyCode === 13){
+            document.getElementById("movies2").innerHTML = "";
             searchMovies("search-list-section", "movies2")
             document.getElementById("movies").style.display = "block"; 
         }
@@ -392,6 +393,7 @@ document.addEventListener("DOMContentLoaded", event => {
     // boton agregar pelicula
     document.getElementById("add-movie-btn").addEventListener("click", ()=>{
         moviesAddArray.push(moviesShown[0].Title)
+        document.getElementById("movies-to-add").innerHTML = ""
         console.log(moviesAddArray)
         moviesAddArray.forEach(movie => {
             document.getElementById("movies-to-add").innerHTML += `
