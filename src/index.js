@@ -50,7 +50,9 @@ document.addEventListener("DOMContentLoaded", event => {
           })
         } else {
           // No user is signed in.
+        document.getElementById("legend").style.display = "block";
         document.getElementById("nav-logout").style.display = "block";
+        document.getElementById("list-create-section").style.display = "none";
         document.getElementById("nav-login").style.display = "none";
         document.getElementById("new-user-mail").value = "";
         document.getElementById("new-user-password").value = "";
@@ -146,13 +148,18 @@ document.addEventListener("DOMContentLoaded", event => {
 
     
 
-    document.getElementById("search").addEventListener("click", ()=> {
+    document.getElementById("search").addEventListener("click", mainSearch)
+    function mainSearch(){
+        searchMovies("search-input")
+    }
+    function searchMovies(searchField) {
         let promises = [];
+        document.getElementById("account-settings").style.display = "none";
         document.getElementById("legend").style.display = "none";
         document.getElementById("movies").innerHTML = "";        
         document.getElementById("movies").style.display = "block";
         document.getElementById("movies-individual").style.display = "none";
-        let userSearch = document.getElementById("search-input").value;
+        let userSearch = document.getElementById(searchField).value;
         function displaySearch(){
             promises.push(fetch("https://cors-anywhere.herokuapp.com/http://www.omdbapi.com/?t="+userSearch+"&plot=full&apikey=8b8cc00a") // 9513ffad //c39cba8d // 8b8cc00a
                             .then(data => data.json())
@@ -195,30 +202,30 @@ document.addEventListener("DOMContentLoaded", event => {
                             
                         
 
-    })
-    
-                        })
-                })
-            })
     }
     
-    const data = {
-        "Glass": { id: 1 },
-        "Benedetta": { id: 2 },
-        "Dumbo": { id: 3 }
-      }; 
-      $('input.autocomplete').autocomplete({
-        data: data,
-        select: function (input, selection) {
-          var model = data[selection];
-          $(input).data('id', model.id)
+    
+    // const data = {
+    //     "Glass": { id: 1 },
+    //     "Benedetta": { id: 2 },
+    //     "Dumbo": { id: 3 }
+    //   }; 
+    //   $('input.autocomplete').autocomplete({
+    //     data: data,
+    //     select: function (input, selection) {
+    //       var model = data[selection];
+    //       $(input).data('id', model.id)
+    //     }
+    //   });
+    
+    document.getElementById("search-list-section").addEventListener("keypress", (e) => {
+        if (e.keyCode === 13){
+            searchMovies("search-list-section")
+            document.getElementById("movies").style.display = "block"; 
         }
-      });
-    document.getElementById("autocomplete-input").addEventListener("keypress", () => {
-
         document.getElementById("check_list").innerHTML = "";
-        let title = document.getElementById("autocomplete-input").value;
-        console.log(title);
+        let title = document.getElementById("search-list-section").value;
+        // console.log(title);
         fetch("https://cors-anywhere.herokuapp.com/http://www.omdbapi.com/?t=" + title + "&plot=full&y=2019&apikey=c39cba8d") //9513ffad
             .then(data => data.json())
             .then(data => {
@@ -295,24 +302,24 @@ document.addEventListener("DOMContentLoaded", event => {
         document.getElementById("account-settings").style.display = "none";
         document.getElementById("movies-individual").style.display = "none";
         document.getElementById("list-create-section").style.display = "block";
-        document.getElementById("list-create-section").innerHTML = `
-        <div class="col s12">
-        <input id="list-name" type="text" placeholder="Nombre de la Lista..">
-        <button class="btn red" id="new-list">Crear</button>
-        </div>
-        `
+        // document.getElementById("list-create-section").innerHTML = `
+        // <div class="col s12">
+        // <input id="list-name" type="text" placeholder="Nombre de la Lista..">
+        // <button class="btn red" id="new-list">Crear</button>
+        // </div>
+        // `
 
 
-        document.getElementById("new-list").addEventListener("click", ()=> {
-            console.log("funciona boton listas")
-            let listName = document.getElementById("list-name").value
-            let saveList = [(database.ref("users/"+firebase.auth().currentUser.uid+"/movieLists").push({
-                [listName]: "a"
-            }))]
-            Promise.all(saveList).then(()=>{
-            document.getElementById("list-create-section").innerHTML = "Lista creada."
-        })
-        })
+        // document.getElementById("new-list").addEventListener("click", ()=> {
+        //     console.log("funciona boton listas")
+        //     let listName = document.getElementById("list-name").value
+        //     let saveList = [(database.ref("users/"+firebase.auth().currentUser.uid+"/movieLists").push({
+        //         [listName]: "a"
+        //     }))]
+        //     Promise.all(saveList).then(()=>{
+        //     document.getElementById("list-create-section").innerHTML = "Lista creada."
+        // })
+        // })
         
     })
 
