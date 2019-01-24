@@ -155,6 +155,7 @@ document.addEventListener("DOMContentLoaded", event => {
 
     document.getElementById("search").addEventListener("click", mainSearch)
     function mainSearch(){
+        document.getElementById("list-create-section").style.display = "none";
         searchMovies("search-input", "movies")
     }
     function searchMovies(searchField, displayDiv) {
@@ -210,18 +211,7 @@ document.addEventListener("DOMContentLoaded", event => {
     }
     
     
-    // const data = {
-    //     "Glass": { id: 1 },
-    //     "Benedetta": { id: 2 },
-    //     "Dumbo": { id: 3 }
-    //   }; 
-    //   $('input.autocomplete').autocomplete({
-    //     data: data,
-    //     select: function (input, selection) {
-    //       var model = data[selection];
-    //       $(input).data('id', model.id)
-    //     }
-    //   });
+    
     
     document.getElementById("search-list-section").addEventListener("keypress", (e) => {
         if (e.keyCode === 13){
@@ -232,34 +222,34 @@ document.addEventListener("DOMContentLoaded", event => {
         
         let title = document.getElementById("search-list-section").value;
         // console.log(title);
-        fetch("https://cors-anywhere.herokuapp.com/http://www.omdbapi.com/?t=" + title + "&plot=full&y=2019&apikey=c39cba8d") //9513ffad
-            .then(data => data.json())
-            .then(data => {
-                if (data.Response === "False") {
-                    return;
-                }
-                if (data.Poster === "N/A") {
-                    return;
-                }
-                document.getElementById("check_list").innerHTML += `
-                <div class="col s12 m7">
-                    <div class="card horizontal">
-                    <div class="card-image">
-                         <img  src="${data.Poster}"> 
-                    </div>
-                    <div class="card-stacked">
-                        <div class="card-content">
-                             <span class="card-title">${data.Title}</span>
-                             <p>${data.Plot}</p>
-                        </div>
-                        <div class="card-action">
-                        <a href="#">Agregar a mi lista</a>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                `
-            })
+        // fetch("https://cors-anywhere.herokuapp.com/http://www.omdbapi.com/?t=" + title + "&plot=full&y=2019&apikey=c39cba8d") //9513ffad
+        //     .then(data => data.json())
+        //     .then(data => {
+        //         if (data.Response === "False") {
+        //             return;
+        //         }
+        //         if (data.Poster === "N/A") {
+        //             return;
+        //         }
+        //         document.getElementById("check_list").innerHTML += `
+        //         <div class="col s12 m7">
+        //             <div class="card horizontal">
+        //             <div class="card-image">
+        //                  <img  src="${data.Poster}"> 
+        //             </div>
+        //             <div class="card-stacked">
+        //                 <div class="card-content">
+        //                      <span class="card-title">${data.Title}</span>
+        //                      <p>${data.Plot}</p>
+        //                 </div>
+        //                 <div class="card-action">
+        //                 <a href="#">Agregar a mi lista</a>
+        //                 </div>
+        //             </div>
+        //             </div>
+        //         </div>
+        //         `
+        //     })
 
     })
 
@@ -310,24 +300,17 @@ document.addEventListener("DOMContentLoaded", event => {
         document.getElementById("account-settings").style.display = "none";
         document.getElementById("movies-individual").style.display = "none";
         document.getElementById("list-create-section").style.display = "block";
-        // document.getElementById("list-create-section").innerHTML = `
-        // <div class="col s12">
-        // <input id="list-name" type="text" placeholder="Nombre de la Lista..">
-        // <button class="btn red" id="new-list">Crear</button>
-        // </div>
-        // `
-
-
-        // document.getElementById("new-list").addEventListener("click", ()=> {
-        //     console.log("funciona boton listas")
-        //     let listName = document.getElementById("list-name").value
-        //     let saveList = [(database.ref("users/"+firebase.auth().currentUser.uid+"/movieLists").push({
-        //         [listName]: "a"
-        //     }))]
-        //     Promise.all(saveList).then(()=>{
-        //     document.getElementById("list-create-section").innerHTML = "Lista creada."
-        // })
-        // })
+       
+        document.getElementById("new-list").addEventListener("click", ()=> {
+            console.log("funciona boton listas")
+            let listName = document.getElementById("list-name").value
+            let saveList = [(database.ref("users/"+firebase.auth().currentUser.uid+"/movieLists").push({
+                [listName]: moviesAddArray
+            }))]
+            Promise.all(saveList).then(()=>{
+            document.getElementById("list-create-section").innerHTML = "Lista creada."
+        })
+        })
         
     })
 
