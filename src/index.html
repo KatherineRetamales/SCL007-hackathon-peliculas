@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,12 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="style.css">
     <title>FilmShare</title>
-
-   <!--Import jQuery before materialize.js-->
-    <!--<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>-->
-
 </head>
-
 <body>
     <nav>
         <div class="nav-wrapper black">
@@ -25,9 +19,9 @@
             <ul id="nav-login" class="right">
                 <li><a class="dropdown-trigger" data-target='dropdown3'>Listas</a></li>
                 <ul id='dropdown3' class='dropdown-content'>
-                        <li><a>Mis Listas</a></li>
-                        <li><a id="create-list">Crear Lista</a></li>
-                    </ul>
+                    <li><a>Mis Listas</a></li>
+                    <li><a id="create-list">Crear Lista</a></li>
+                </ul>
                 <li><a class='dropdown-trigger' href='#' data-target='dropdown1'><i class="material-icons prefix">account_circle</i></a></li>
                 <ul id='dropdown1' class='dropdown-content'>
                     <li><a>Friends</a></li>
@@ -39,7 +33,7 @@
                 <li><a class='dropdown-trigger' href='#' data-target='dropdown2'>Buscar</a></li>
                 <ul id='dropdown2' class='dropdown-content'>
                     <li><input id="search-input" type="text" Placeholder="Titulo de la palicula..">
-                    <button id="search" class="btn red">Buscar</button>
+                        <button id="search" class="btn red">Buscar</button>
                     </li>
                 </ul>
             </ul>
@@ -73,79 +67,48 @@
             <button id="sign-up-btn" class="modal-close waves-effect waves-green btn red">Sign Up</button>
         </div>
     </div>
-    <div id="root">
-
-    </div>
+    <div id="root"></div>
 
     <div class="row container center" id="legend">
         <h5>Este 2019, las mejores peliculas...</h5>
     </div>
-    
-    
 
-       <div class="row container" id="list-create-section">
-            <div class="col s6 top-margin">
-                <div class="row">
-                    <div class="input-field col s11">
-                        <input id="list-name" type="text" class="validate">
-                        <label for="list-name">¿Que nombre le quieres poner a tu lista?</label>
-                    </div>
+    <div class="row container" id="list-create-section">
+        <div class="col s6 top-margin">
+            <div class="row">
+                <div class="input-field col s11">
+                    <input id="list-name" type="text" class="validate">
+                    <label for="list-name">¿Que nombre le quieres poner a tu lista?</label>
                 </div>
-                <div class="row">
-                    <div class="input-field col s11">
-                        <i class="material-icons small prefix">add</i>
-                        <input id="search-list-section" type="text">
-                        <label for="search-list-section">¿Que pelicula quieres agregar?</label>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s11">
+                    <i class="material-icons small prefix">add</i>
+                    <input id="search-list-section" type="text">
+                    <label for="search-list-section">¿Que pelicula quieres agregar?</label>
                 </div>
-                
-                    
-                
-                
-
-                
             </div>
-            <div class="col s5 offset-s1 top-margin">
-                <h5>Las peliculas que vas a agregar son...</h5>
-                <ul id="movies-to-add">
-
-                </ul>
-                <button id="new-list" class="btn red">Crear Lista</button>
-
-            </div>
-            <div class="container row">
+        </div>
+        <div class="col s5 offset-s1 top-margin">
+            <h5>Las peliculas que vas a agregar son...</h5>
+            <ul id="movies-to-add"></ul>
+            <button id="new-list" class="btn red">Crear Lista</button>
+        </div>
+        <div class="container row">
             <div id="movies2" class="col s12">
             </div>
             <div class="col s12">
                 <button id="add-movie-btn" class="btn red">Agregar Pelicula</button>
             </div>
-            </div>
         </div>
-        <div id="movies-individual" class="container row">
-
-        </div>
-       
-    <div id="list-create-section" class="container row">
-
     </div>
-    <div id="account-settings" class="container row">
+    <div id="movies-individual" class="container row"></div>
 
-    </div>
+    <div id="list-create-section" class="container row"></div>
+    
+    <div id="account-settings" class="container row"></div>
 
-    <div id="movies" class="container row">
-
-    </div>
-
-
-
-
-
-
-
-
-
-
-
+    <div id="movies" class="container row"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
@@ -153,4 +116,3 @@
 </body>
 
 </html>
-
