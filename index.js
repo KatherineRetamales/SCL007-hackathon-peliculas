@@ -346,6 +346,9 @@ document.addEventListener("DOMContentLoaded", event => {
     document.getElementById("logo").addEventListener("click", () => {
         window.location.reload();
     })
+    document.getElementById("logout").addEventListener("click", () => {
+        window.location.reload();
+    })
     let moviesAddArray = [];
     // boton agregar pelicula
     document.getElementById("add-movie-btn").addEventListener("click", () => {
