@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", event => {
 
     }
             
-     initialPage();       
+    // initialPage();       
 
     
 
