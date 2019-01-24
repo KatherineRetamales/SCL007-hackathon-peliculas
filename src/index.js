@@ -135,7 +135,8 @@ document.addEventListener("DOMContentLoaded", event => {
                 console.log("cargo")
                 createLinks(movieLinks);
             })
-    }    
+    }
+     
 
     document.getElementById("search").addEventListener("click", mainSearch)
     function mainSearch() {
@@ -194,7 +195,7 @@ document.addEventListener("DOMContentLoaded", event => {
             searchMovies("search-list-section", "movies2")
             document.getElementById("movies").style.display = "block";
         }
-      
+    
     })
 
 
@@ -358,6 +359,12 @@ document.addEventListener("DOMContentLoaded", event => {
             `
         })
     })
+
+
+
+
+
+
 })
 
 let snap;
