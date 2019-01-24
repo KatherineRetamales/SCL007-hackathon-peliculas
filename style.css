@@ -1,0 +1,67 @@
+.card-poster {
+    max-height: 300px;
+}
+
+.movie-card {
+    /* border: 1px solid black; */
+    box-sizing: border-box;
+    margin: 0 !important;
+}
+
+#movies {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#dropdown2 {
+    /* max-width: 50%; */
+    padding: 20px;
+}
+
+a.dropdown-trigger:focus {
+    outline: none;
+}
+
+#nav-logout, #nav-login, #list-create-section, #account-settings {
+    display: none;
+}
+
+.sinopsis {
+    margin-top: 0;
+}
+
+#movies-individual {
+    margin-top: 5%;
+}
+
+body {
+    background-color: rgb(248, 232, 213);
+}
+
+.settings-info {
+    width: 50% !important;
+}
+
+textarea {
+    resize: none;
+    height: 200px;
+}
+
+#save-settings {
+    margin-top: 30px;
+}
+
+.dropdown-content li>a {
+    color: red;
+}
+
+input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]){
+    border-bottom: 0.5px solid red;
+    box-shadow: 0 0.5px 0 0 red;
+}
+
+textarea#hobbies.settings-info:focus {
+    outline: none;
+    border: 1px solid red;
+}
