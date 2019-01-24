@@ -18,8 +18,8 @@ document.addEventListener("DOMContentLoaded", event => {
         projectId: "primera-hackaton-17f7d",
         storageBucket: "",
         messagingSenderId: "289210816015"
-      };
-      firebase.initializeApp(config);
+    };
+    firebase.initializeApp(config);
     const app = firebase.app();
 
     const database = firebase.database();
@@ -58,35 +58,37 @@ document.addEventListener("DOMContentLoaded", event => {
         document.getElementById("user-password").value = "";
         // document.getElementById("root").innerHTML = ""
         }
-      });
-    
-    document.getElementById("login-btn").addEventListener("click", ()=> {
+    });
+
+    document.getElementById("login-btn").addEventListener("click", () => {
         const userMail = document.getElementById("user-mail").value;
         const userPassword = document.getElementById("user-password").value;
 
 
-        firebase.auth().signInWithEmailAndPassword(userMail, userPassword).catch(function(error) {
+        firebase.auth().signInWithEmailAndPassword(userMail, userPassword).catch(function (error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
             // ...
-          });
+        });
     })
 
-    document.getElementById("sign-up-btn").addEventListener("click", ()=> {
+    document.getElementById("sign-up-btn").addEventListener("click", () => {
         let newUserMail = document.getElementById("new-user-mail").value;
         let newUserPassword = document.getElementById("new-user-password").value;
-        firebase.auth().createUserWithEmailAndPassword(newUserMail, newUserPassword).catch(function(error) {
+        firebase.auth().createUserWithEmailAndPassword(newUserMail, newUserPassword).catch(function (error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
             // ...
             alert(errorCode+ " " + errorMessage)
             
+
         });
-        
-        
+
+
     })
+
 
     function saveNewUser(){
         database.ref("users/"+firebase.auth().currentUser.uid).set({
@@ -109,10 +111,10 @@ document.addEventListener("DOMContentLoaded", event => {
                     promises.push(fetch("https://cors-anywhere.herokuapp.com/http://www.omdbapi.com/?t="+title+"&plot=full&y=2019&apikey=8b8cc00a") //9513ffad //c39cba8d  // 8b8cc00a
                         .then(data => data.json())
                         .then(data => {
-                            if (data.Response === "False"){
+                            if (data.Response === "False") {
                                 return;
                             }
-                            if (data.Poster === "N/A"){
+                            if (data.Poster === "N/A") {
                                 return;
                             }
                             moviesShown.push(data)
@@ -127,9 +129,7 @@ document.addEventListener("DOMContentLoaded", event => {
                                     </div>
                                 </div>
                             </div>
-                            
-                            `
-    
+                            `   
                             
                         }))
                 }) 
@@ -197,6 +197,58 @@ document.addEventListener("DOMContentLoaded", event => {
 
     })
     
+                        })
+                })
+            })
+    }
+    
+    const data = {
+        "Glass": { id: 1 },
+        "Benedetta": { id: 2 },
+        "Dumbo": { id: 3 }
+      }; 
+      $('input.autocomplete').autocomplete({
+        data: data,
+        select: function (input, selection) {
+          var model = data[selection];
+          $(input).data('id', model.id)
+        }
+      });
+    document.getElementById("autocomplete-input").addEventListener("keypress", () => {
+
+        document.getElementById("check_list").innerHTML = "";
+        let title = document.getElementById("autocomplete-input").value;
+        console.log(title);
+        fetch("https://cors-anywhere.herokuapp.com/http://www.omdbapi.com/?t=" + title + "&plot=full&y=2019&apikey=c39cba8d") //9513ffad
+            .then(data => data.json())
+            .then(data => {
+                if (data.Response === "False") {
+                    return;
+                }
+                if (data.Poster === "N/A") {
+                    return;
+                }
+                document.getElementById("check_list").innerHTML += `
+                <div class="col s12 m7">
+                    <div class="card horizontal">
+                    <div class="card-image">
+                         <img  src="${data.Poster}"> 
+                    </div>
+                    <div class="card-stacked">
+                        <div class="card-content">
+                             <span class="card-title">${data.Title}</span>
+                             <p>${data.Plot}</p>
+                        </div>
+                        <div class="card-action">
+                        <a href="#">Agregar a mi lista</a>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                `
+            })
+
+    })
 
     
 
@@ -249,6 +301,7 @@ document.addEventListener("DOMContentLoaded", event => {
         <button class="btn red" id="new-list">Crear</button>
         </div>
         `
+
 
         document.getElementById("new-list").addEventListener("click", ()=> {
             console.log("funciona boton listas")
