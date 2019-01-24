@@ -352,7 +352,11 @@ document.addEventListener("DOMContentLoaded", event => {
         moviesAddArray.push(moviesShown[0].Title)
         document.getElementById("movies-to-add").innerHTML = ""
         console.log(moviesAddArray)
-        moviesAddArray.forEach(movie => {
+        const titleArray = moviesAddArray.filter(function(item, index, array) {
+            return array.indexOf(item) === index;
+          })
+          console.log(titleArray); 
+          titleArray.forEach(movie => {
             document.getElementById("movies-to-add").innerHTML += `
             <li>${movie}</li>
             `
