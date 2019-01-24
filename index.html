@@ -84,33 +84,49 @@
     
 
        <div class="row container" id="list-create-section">
-            <div class="col s6">
+            <div class="col s6 top-margin">
                 <div class="row">
-                    <div class="input-field col s12">
-                        <input  type="text" class="validate" placeholder="¿Que nombre quieres ponerle a la lista?">
+                    <div class="input-field col s11">
+                        <input id="list-name" type="text" class="validate">
+                        <label for="list-name">¿Que nombre le quieres poner a tu lista?</label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s12">
-                        <i class="material-icons prefix">add</i>
+                    <div class="input-field col s11">
+                        <i class="material-icons small prefix">add</i>
                         <input id="search-list-section" type="text">
-                        <label for="autocomplete-input">¿Que pelicula quieres agregar?</label>
+                        <label for="search-list-section">¿Que pelicula quieres agregar?</label>
                     </div>
                 </div>
+                <div class="row">
+                    
+                <div id="movies2" class="col s6">
+                </div>
+                <div class="col s6">
+                    <button id="add-movie-btn" class="btn red">Agregar Pelicula</button>
+                </div>
+                
+
+                </div>
+            </div>
+            <div class="col s5 offset-s1 top-margin">
+                <h5>Las peliculas que vas a agregar son...</h5>
+
             </div>
             <div class="row" id="check_list"></div>
         </div>
         <div id="movies-individual" class="container row">
 
         </div>
-        <div id="movies" class="row container">
-    
-
-        </div>
+       
     <div id="list-create-section" class="container row">
 
     </div>
     <div id="account-settings" class="container row">
+
+    </div>
+
+    <div id="movies" class="container row">
 
     </div>
 
