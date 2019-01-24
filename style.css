@@ -23,7 +23,7 @@ a.dropdown-trigger:focus {
     outline: none;
 }
 
-#nav-logout, #nav-login, #list-create-section, #account-settings, #add-movie {
+#nav-logout, #nav-login, #list-create-section, #account-settings, #add-movie, #succesful-message, #user-lists-section {
     display: none;
 }
 
