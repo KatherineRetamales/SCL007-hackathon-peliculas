@@ -228,7 +228,7 @@ document.addEventListener("DOMContentLoaded", event => {
             searchMovies("search-list-section", "movies2")
             document.getElementById("movies").style.display = "block"; 
         }
-        document.getElementById("check_list").innerHTML = "";
+        
         let title = document.getElementById("search-list-section").value;
         // console.log(title);
         fetch("https://cors-anywhere.herokuapp.com/http://www.omdbapi.com/?t=" + title + "&plot=full&y=2019&apikey=c39cba8d") //9513ffad
@@ -392,8 +392,12 @@ document.addEventListener("DOMContentLoaded", event => {
     // boton agregar pelicula
     document.getElementById("add-movie-btn").addEventListener("click", ()=>{
         moviesAddArray.push(moviesShown[0].Title)
-       
-        
+        console.log(moviesAddArray)
+        moviesAddArray.forEach(movie => {
+            document.getElementById("movies-to-add").innerHTML += `
+            <li>${movie}</li>
+            `
+        })
     })
 
 
