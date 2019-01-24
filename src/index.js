@@ -22,41 +22,43 @@ document.addEventListener("DOMContentLoaded", event => {
     let activeUser;
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-            // User is signed in.
-            database.ref("users/" + firebase.auth().currentUser.uid).once('value', function (snapshot) {
-                if (snapshot.val() === null) {
-                    saveNewUser();
-                }
-            })
-            initialPage();
-            document.getElementById("nav-logout").style.display = "none";
-            document.getElementById("nav-login").style.display = "block";
-            document.getElementById("new-user-mail").value = "";
-            document.getElementById("new-user-password").value = "";
-            document.getElementById("user-mail").value = "";
-            document.getElementById("user-password").value = "";
-            // document.getElementById("root").innerHTML = `<p>Hola ${user.email}</p>
-
-            //   `
-            document.getElementById("logout").addEventListener("click", () => {
-                firebase.auth().signOut().then(function () {
-                    // Sign-out successful.
-                }).catch(function (error) {
-                    // An error happened.
-                });
-            })
+          // User is signed in.
+          database.ref("users/"+firebase.auth().currentUser.uid).once('value', function(snapshot) {
+            if(snapshot.val() === null) {
+                saveNewUser();
+            }
+        })
+        initialPage();
+        document.getElementById("succesful-message").style.display = "none";
+        document.getElementById("nav-logout").style.display = "none";
+        document.getElementById("nav-login").style.display = "block";
+        document.getElementById("new-user-mail").value = "";
+        document.getElementById("new-user-password").value = "";
+        document.getElementById("user-mail").value = "";
+        document.getElementById("user-password").value = "";
+        // document.getElementById("root").innerHTML = `<p>Hola ${user.email}</p>
+    
+        //   `
+        document.getElementById("logout").addEventListener("click", ()=> {
+            firebase.auth().signOut().then(function() {
+                // Sign-out successful.
+              }).catch(function(error) {
+                // An error happened.
+              });
+          })
         } else {
-            // No user is signed in.
-            initialPage();
-            document.getElementById("legend").style.display = "block";
-            document.getElementById("nav-logout").style.display = "block";
-            document.getElementById("list-create-section").style.display = "none";
-            document.getElementById("nav-login").style.display = "none";
-            document.getElementById("new-user-mail").value = "";
-            document.getElementById("new-user-password").value = "";
-            document.getElementById("user-mail").value = "";
-            document.getElementById("user-password").value = "";
-            // document.getElementById("root").innerHTML = ""
+          // No user is signed in.
+          initialPage();  
+        document.getElementById("succesful-message").style.display = "none";
+        document.getElementById("legend").style.display = "block";
+        document.getElementById("nav-logout").style.display = "block";
+        document.getElementById("list-create-section").style.display = "none";
+        document.getElementById("nav-login").style.display = "none";
+        document.getElementById("new-user-mail").value = "";
+        document.getElementById("new-user-password").value = "";
+        document.getElementById("user-mail").value = "";
+        document.getElementById("user-password").value = "";
+        // document.getElementById("root").innerHTML = ""
         }
     });
 
@@ -133,9 +135,7 @@ document.addEventListener("DOMContentLoaded", event => {
                 console.log("cargo")
                 createLinks(movieLinks);
             })
-    }
-
-    // initialPage();       
+    }    
 
     document.getElementById("search").addEventListener("click", mainSearch)
     function mainSearch() {
@@ -144,6 +144,7 @@ document.addEventListener("DOMContentLoaded", event => {
     }
     function searchMovies(searchField, displayDiv) {
         let promises = [];
+        document.getElementById("succesful-message").style.display = "none";
         document.getElementById("account-settings").style.display = "none";
         document.getElementById("legend").style.display = "none";
         document.getElementById("movies").innerHTML = "";
@@ -193,38 +194,7 @@ document.addEventListener("DOMContentLoaded", event => {
             searchMovies("search-list-section", "movies2")
             document.getElementById("movies").style.display = "block";
         }
-
-        let title = document.getElementById("search-list-section").value;
-        // console.log(title);
-        // fetch("https://cors-anywhere.herokuapp.com/http://www.omdbapi.com/?t=" + title + "&plot=full&y=2019&apikey=c39cba8d") //9513ffad
-        //     .then(data => data.json())
-        //     .then(data => {
-        //         if (data.Response === "False") {
-        //             return;
-        //         }
-        //         if (data.Poster === "N/A") {
-        //             return;
-        //         }
-        //         document.getElementById("check_list").innerHTML += `
-        //         <div class="col s12 m7">
-        //             <div class="card horizontal">
-        //             <div class="card-image">
-        //                  <img  src="${data.Poster}"> 
-        //             </div>
-        //             <div class="card-stacked">
-        //                 <div class="card-content">
-        //                      <span class="card-title">${data.Title}</span>
-        //                      <p>${data.Plot}</p>
-        //                 </div>
-        //                 <div class="card-action">
-        //                 <a href="#">Agregar a mi lista</a>
-        //                 </div>
-        //             </div>
-        //             </div>
-        //         </div>
-        //         `
-        //     })
-
+      
     })
 
 
@@ -281,9 +251,10 @@ document.addEventListener("DOMContentLoaded", event => {
             let saveList = [(database.ref("users/" + firebase.auth().currentUser.uid + "/movieLists").push({
                 [listName]: moviesAddArray
             }))]
-            Promise.all(saveList).then(() => {
-                document.getElementById("list-create-section").innerHTML = "Lista creada."
-            })
+            Promise.all(saveList).then(()=>{
+            document.getElementById("succesful-message").style.display = "block";
+            document.getElementById("succesful-message").innerHTML = "Lista creada."
+        })
         })
 
     })
@@ -294,8 +265,8 @@ document.addEventListener("DOMContentLoaded", event => {
             window.snap = snapshot.val();
 
         }))]
-        Promise.all(promise).then(() => {
-
+        Promise.all(promise).then(()=>{
+            document.getElementById("succesful-message").style.display = "none";
             document.getElementById("legend").style.display = "none";
             document.getElementById("movies").style.display = "none";
             document.getElementById("movies-individual").style.display = "none";
@@ -342,6 +313,31 @@ document.addEventListener("DOMContentLoaded", event => {
         })
     }
 
+    document.getElementById("user-lists").addEventListener("click", ()=> {
+        let promise = [(firebase.database().ref("users/"+firebase.auth().currentUser.uid).once('value', function(snapshot){
+            window.snap = snapshot.val();
+            
+        }))]
+        Promise.all(promise).then(()=> {
+            document.getElementById("succesful-message").style.display = "none";
+            document.getElementById("legend").style.display = "none";
+            document.getElementById("movies").style.display = "none";
+            document.getElementById("movies-individual").style.display = "none";
+            document.getElementById("list-create-section").style.display = "none";
+            document.getElementById("account-settings").style.display = "none";
+            document.getElementById("user-lists-section").style.display = "block";
+            document.getElementById("user-lists-section").innerHTML = `
+            <div class="col s12">
+            <h4>${window.snap.userName},</h4>
+            <h5>tienes las siguientes listas creadas:</h5>
+            
+    
+            </div>
+            `
+
+        })
+
+    })
 
     document.getElementById("logo").addEventListener("click", () => {
         window.location.reload();
@@ -362,12 +358,6 @@ document.addEventListener("DOMContentLoaded", event => {
             `
         })
     })
-
-
-
-
-
-
 })
 
 let snap;
