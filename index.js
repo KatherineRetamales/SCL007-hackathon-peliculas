@@ -1,16 +1,12 @@
-
- 
-
 document.addEventListener("DOMContentLoaded", event => {
     window.M.AutoInit();
     let instance = M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'),
         {
-                hover: true,
-                constrainWidth: false,
-                coverTrigger: false,
-                closeOnClick: false
-            }
-    )
+            hover: true,
+            constrainWidth: false,
+            coverTrigger: false,
+            closeOnClick: false
+        })
     let config = {
         apiKey: "AIzaSyBTscKCGyacpck5Wdb7qpKySQ_6qR-ppBk",
         authDomain: "primera-hackaton-17f7d.firebaseapp.com",
@@ -24,50 +20,49 @@ document.addEventListener("DOMContentLoaded", event => {
 
     const database = firebase.database();
     let activeUser;
-    firebase.auth().onAuthStateChanged(function(user) {
+    firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-          // User is signed in.
-          database.ref("users/"+firebase.auth().currentUser.uid).once('value', function(snapshot) {
-            if(snapshot.val() === null) {
-                saveNewUser();
-            }
-        })
-        initialPage();
-        document.getElementById("nav-logout").style.display = "none";
-        document.getElementById("nav-login").style.display = "block";
-        document.getElementById("new-user-mail").value = "";
-        document.getElementById("new-user-password").value = "";
-        document.getElementById("user-mail").value = "";
-        document.getElementById("user-password").value = "";
-        // document.getElementById("root").innerHTML = `<p>Hola ${user.email}</p>
-    
-        //   `
-        document.getElementById("logout").addEventListener("click", ()=> {
-            firebase.auth().signOut().then(function() {
-                // Sign-out successful.
-              }).catch(function(error) {
-                // An error happened.
-              });
-          })
+            // User is signed in.
+            database.ref("users/" + firebase.auth().currentUser.uid).once('value', function (snapshot) {
+                if (snapshot.val() === null) {
+                    saveNewUser();
+                }
+            })
+            initialPage();
+            document.getElementById("nav-logout").style.display = "none";
+            document.getElementById("nav-login").style.display = "block";
+            document.getElementById("new-user-mail").value = "";
+            document.getElementById("new-user-password").value = "";
+            document.getElementById("user-mail").value = "";
+            document.getElementById("user-password").value = "";
+            // document.getElementById("root").innerHTML = `<p>Hola ${user.email}</p>
+
+            //   `
+            document.getElementById("logout").addEventListener("click", () => {
+                firebase.auth().signOut().then(function () {
+                    // Sign-out successful.
+                }).catch(function (error) {
+                    // An error happened.
+                });
+            })
         } else {
-          // No user is signed in.
-          initialPage();  
-        document.getElementById("legend").style.display = "block";
-        document.getElementById("nav-logout").style.display = "block";
-        document.getElementById("list-create-section").style.display = "none";
-        document.getElementById("nav-login").style.display = "none";
-        document.getElementById("new-user-mail").value = "";
-        document.getElementById("new-user-password").value = "";
-        document.getElementById("user-mail").value = "";
-        document.getElementById("user-password").value = "";
-        // document.getElementById("root").innerHTML = ""
+            // No user is signed in.
+            initialPage();
+            document.getElementById("legend").style.display = "block";
+            document.getElementById("nav-logout").style.display = "block";
+            document.getElementById("list-create-section").style.display = "none";
+            document.getElementById("nav-login").style.display = "none";
+            document.getElementById("new-user-mail").value = "";
+            document.getElementById("new-user-password").value = "";
+            document.getElementById("user-mail").value = "";
+            document.getElementById("user-password").value = "";
+            // document.getElementById("root").innerHTML = ""
         }
     });
 
     document.getElementById("login-btn").addEventListener("click", () => {
         const userMail = document.getElementById("user-mail").value;
         const userPassword = document.getElementById("user-password").value;
-
 
         firebase.auth().signInWithEmailAndPassword(userMail, userPassword).catch(function (error) {
             // Handle Errors here.
@@ -85,35 +80,30 @@ document.addEventListener("DOMContentLoaded", event => {
             var errorCode = error.code;
             var errorMessage = error.message;
             // ...
-            alert(errorCode+ " " + errorMessage)
-            
-
+            alert(errorCode + " " + errorMessage)
         });
-
-
     })
 
-
-    function saveNewUser(){
-        database.ref("users/"+firebase.auth().currentUser.uid).set({
+    function saveNewUser() {
+        database.ref("users/" + firebase.auth().currentUser.uid).set({
             email: firebase.auth().currentUser.email,
         })
-        database.ref("users/"+firebase.auth().currentUser.uid).update({
+        database.ref("users/" + firebase.auth().currentUser.uid).update({
             movieLists: false
         })
     }
-   
+
     function initialPage() {
         document.getElementById("movies").innerHTML = "";
         fetch("https://api.themoviedb.org/3/discover/movie?api_key=48819a4f88e3d597df63bebab6723d0f&primary_release_year=2019")
-        .then(data => data.json())
-        .then(data => {
-            let promises = [];
+            .then(data => data.json())
+            .then(data => {
+                let promises = [];
                 let dataMovies = data.results;
                 dataMovies.forEach(movie => {
                     let title = movie.title;
                     moviesShown = [];
-                    promises.push(fetch("https://cors-anywhere.herokuapp.com/http://www.omdbapi.com/?t="+title+"&plot=full&y=2019&apikey=8b8cc00a") //9513ffad //c39cba8d  // 8b8cc00a
+                    promises.push(fetch("https://cors-anywhere.herokuapp.com/http://www.omdbapi.com/?t=" + title + "&plot=full&y=2019&apikey=8b8cc00a") //9513ffad //c39cba8d  // 8b8cc00a
                         .then(data => data.json())
                         .then(data => {
                             if (data.Response === "False") {
@@ -134,27 +124,21 @@ document.addEventListener("DOMContentLoaded", event => {
                                     </div>
                                 </div>
                             </div>
-                            `   
-                            
+                            `
                         }))
-                }) 
-                
+                })
                 return Promise.all(promises)
             })
-            .then(()=>{
+            .then(() => {
                 console.log("cargo")
                 createLinks(movieLinks);
             })
-            
-
     }
-            
+
     // initialPage();       
 
-    
-
     document.getElementById("search").addEventListener("click", mainSearch)
-    function mainSearch(){
+    function mainSearch() {
         document.getElementById("list-create-section").style.display = "none";
         searchMovies("search-input", "movies")
     }
@@ -162,64 +146,54 @@ document.addEventListener("DOMContentLoaded", event => {
         let promises = [];
         document.getElementById("account-settings").style.display = "none";
         document.getElementById("legend").style.display = "none";
-        document.getElementById("movies").innerHTML = "";        
+        document.getElementById("movies").innerHTML = "";
         document.getElementById("movies").style.display = "block";
         document.getElementById("movies-individual").style.display = "none";
         let userSearch = document.getElementById(searchField).value;
-        function displaySearch(){
-            promises.push(fetch("https://cors-anywhere.herokuapp.com/http://www.omdbapi.com/?t="+userSearch+"&plot=full&apikey=8b8cc00a") // 9513ffad //c39cba8d // 8b8cc00a
-                            .then(data => data.json())
-                            .then(data => {
-                                // console.log("oli")
-                                if (data.Response === "False"){
-                                    return;
-                                }
-                                if (data.Poster === "N/A"){
-                                    return;
-                                }
-                                moviesShown = [];
-                                moviesShown.push(data)
-                                document.getElementById(displayDiv).innerHTML += `
-                                    <div class="col s12 m4 movie-card">
-                                        <div class="card small center-align white">
-                                            <div class="card-content white-text">
-                                                <img class="responsive-img card-poster" src="${data.Poster}">
-                                            </div>
-                                            <div class="card-action">
-                                                <a class="individual-movie-search" href="#">${data.Title}</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    `
-    
-                                }))
-                                return Promise.all(promises);
+        function displaySearch() {
+            promises.push(fetch("https://cors-anywhere.herokuapp.com/http://www.omdbapi.com/?t=" + userSearch + "&plot=full&apikey=8b8cc00a") // 9513ffad //c39cba8d // 8b8cc00a
+                .then(data => data.json())
+                .then(data => {
+                    // console.log("oli")
+                    if (data.Response === "False") {
+                        return;
+                    }
+                    if (data.Poster === "N/A") {
+                        return;
+                    }
+                    moviesShown = [];
+                    moviesShown.push(data)
+                    document.getElementById(displayDiv).innerHTML += `
+                        <div class="col s12 m4 movie-card">
+                            <div class="card small center-align white">
+                                <div class="card-content white-text">
+                                    <img class="responsive-img card-poster" src="${data.Poster}">
+                                </div>
+                                <div class="card-action">
+                                    <a class="individual-movie-search" href="#">${data.Title}</a>
+                                </div>
+                            </div>
+                        </div> `
+                }))
+            return Promise.all(promises);
 
         }
-        displaySearch().then(()=>{
+        displaySearch().then(() => {
             console.log("cargo")
             let searchLinks = document.getElementsByClassName("individual-movie-search");
             createLinks(searchLinks);
         })
-                            
-
-                            
-                            
-                        
 
     }
-    
-    
-    
-    
+
+
     document.getElementById("search-list-section").addEventListener("keypress", (e) => {
-        if (e.keyCode === 13){
+        if (e.keyCode === 13) {
             document.getElementById("movies2").innerHTML = "";
             searchMovies("search-list-section", "movies2")
-            document.getElementById("movies").style.display = "block"; 
+            document.getElementById("movies").style.display = "block";
         }
-        
+
         let title = document.getElementById("search-list-section").value;
         // console.log(title);
         // fetch("https://cors-anywhere.herokuapp.com/http://www.omdbapi.com/?t=" + title + "&plot=full&y=2019&apikey=c39cba8d") //9513ffad
@@ -253,15 +227,15 @@ document.addEventListener("DOMContentLoaded", event => {
 
     })
 
-    
+
 
     let moviesShown = [];
 
 
     let movieLinks = document.getElementsByClassName("individual-movie-link");
     function createLinks(movieLinks) {
-    
-        for(let i = 0; i<movieLinks.length; i++) {
+
+        for (let i = 0; i < movieLinks.length; i++) {
             movieLinks[i].addEventListener("click", () => {
                 document.getElementById("legend").style.display = "none";
                 document.getElementById("movies").style.display = "none";
@@ -289,10 +263,10 @@ document.addEventListener("DOMContentLoaded", event => {
                 `
             })
         }
-    
+
     }
 
-    document.getElementById("create-list").addEventListener("click", ()=> {
+    document.getElementById("create-list").addEventListener("click", () => {
         // document.getElementById("add-movie").style.display = "block";
         moviesAddArray = [];
         document.getElementById("legend").style.display = "none";
@@ -300,27 +274,27 @@ document.addEventListener("DOMContentLoaded", event => {
         document.getElementById("account-settings").style.display = "none";
         document.getElementById("movies-individual").style.display = "none";
         document.getElementById("list-create-section").style.display = "block";
-       
-        document.getElementById("new-list").addEventListener("click", ()=> {
+
+        document.getElementById("new-list").addEventListener("click", () => {
             console.log("funciona boton listas")
             let listName = document.getElementById("list-name").value
-            let saveList = [(database.ref("users/"+firebase.auth().currentUser.uid+"/movieLists").push({
+            let saveList = [(database.ref("users/" + firebase.auth().currentUser.uid + "/movieLists").push({
                 [listName]: moviesAddArray
             }))]
-            Promise.all(saveList).then(()=>{
-            document.getElementById("list-create-section").innerHTML = "Lista creada."
+            Promise.all(saveList).then(() => {
+                document.getElementById("list-create-section").innerHTML = "Lista creada."
+            })
         })
-        })
-        
+
     })
 
     document.getElementById("settings-btn").addEventListener("click", settingsPage)
-    function settingsPage () {
-        let promise = [(firebase.database().ref("users/"+firebase.auth().currentUser.uid).once('value', function(snapshot){
+    function settingsPage() {
+        let promise = [(firebase.database().ref("users/" + firebase.auth().currentUser.uid).once('value', function (snapshot) {
             window.snap = snapshot.val();
-            
+
         }))]
-        Promise.all(promise).then(()=>{
+        Promise.all(promise).then(() => {
 
             document.getElementById("legend").style.display = "none";
             document.getElementById("movies").style.display = "none";
@@ -347,21 +321,21 @@ document.addEventListener("DOMContentLoaded", event => {
             <p>Intereses</p>
             </div>
             <div class="col s9">
-            <textarea id="hobbies" rows="20" class="settings-info" placeholder="Describenos tus intereses.."></textarea>
+            <textarea id="hobbies" rows="20" class="settings-info" placeholder="Describenos tus intereses..">${window.snap.userHobbies ? window.snap.userHobbies : firebase.auth().currentUser.userHobbies}</textarea>
             </div>
             <div class="co s12 center">
             <button class="btn red" id="save-settings">Guardar Cambios</button>
             </div>
             `
-    
-            document.getElementById("save-settings").addEventListener("click", ()=> {
+
+            document.getElementById("save-settings").addEventListener("click", () => {
                 let userName = document.getElementById("username").value;
                 let userHobbies = document.getElementById("hobbies").value;
-                let promise = [(database.ref("users/"+firebase.auth().currentUser.uid).update({
+                let promise = [(database.ref("users/" + firebase.auth().currentUser.uid).update({
                     userName: userName,
                     userHobbies: userHobbies
                 }))]
-                Promise.all(promise).then(()=>{
+                Promise.all(promise).then(() => {
                     document.getElementById("account-settings").innerHTML = "Información actualizada."
                 })
             })
@@ -369,12 +343,12 @@ document.addEventListener("DOMContentLoaded", event => {
     }
 
 
-    document.getElementById("logo").addEventListener("click", ()=>{
+    document.getElementById("logo").addEventListener("click", () => {
         window.location.reload();
     })
     let moviesAddArray = [];
     // boton agregar pelicula
-    document.getElementById("add-movie-btn").addEventListener("click", ()=>{
+    document.getElementById("add-movie-btn").addEventListener("click", () => {
         moviesAddArray.push(moviesShown[0].Title)
         document.getElementById("movies-to-add").innerHTML = ""
         console.log(moviesAddArray)
