@@ -343,9 +343,9 @@ document.addEventListener("DOMContentLoaded", event => {
             document.getElementById("user-lists-section").style.display = "block";
             document.getElementById("user-lists-section").innerHTML = `
             <div class="col s12">
-            <h4>${window.snap.userName},</h4>
+            <h4>${window.snap.userName ? window.snap.userName : firebase.auth().currentUser.email},</h4>
             <h5>tienes las siguientes listas creadas:</h5>
-            <ul id="lists-here">
+            <ul id="lists-here" class="collapsible">
 
             </ul>
     
@@ -366,7 +366,29 @@ document.addEventListener("DOMContentLoaded", event => {
 
         })
     
-
+        function showCards(list){
+            let htmlString = "";
+            list.forEach(title => {
+                fetch("https://cors-anywhere.herokuapp.com/http://www.omdbapi.com/?t=" + title + "&plot=full&apikey=8b8cc00a")
+                    .then(data => data.json())
+                    .then(data=> {
+                        htmlString = htmlString + `
+                        <div class="col s12 m4 movie-card">
+                            <div class="card small center-align white">
+                                <div class="card-content white-text">
+                                    <img class="responsive-img card-poster" src="${data.Poster}">
+                                </div>
+                                <div class="card-action">
+                                    <a class="individual-movie-search" href="#">${data.Title}</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        `
+                    })
+            })
+            return htmlString
+        }
     
     
     function userLists() {
@@ -380,10 +402,22 @@ document.addEventListener("DOMContentLoaded", event => {
           }))]
           Promise.all(promise).then(
               currentLists.forEach(list => {
-                  console.log(list)
+                  console.log(list[Object.keys(list)])
                   document.getElementById("lists-here").innerHTML += `
-                  <li>${Object.keys(list)}</li>
+                  <li>
+                  <div class="collapsible-header">${Object.keys(list)}</div>
+                  <div class="collapsible-body">${showCards(list[Object.keys(list)])}</div>
+                  </li>
                   `
+                  window.M.AutoInit();
+                  let instance = M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'),
+                    {
+                        hover: true,
+                        constrainWidth: false,
+                        coverTrigger: false,
+                        closeOnClick: false
+                    })
+                  
               })
 
           )
