@@ -439,14 +439,17 @@ document.addEventListener("DOMContentLoaded", event => {
     let moviesAddArray = [];
     // boton agregar pelicula
     document.getElementById("add-movie-btn").addEventListener("click", () => {
+        if (moviesAddArray.indexOf(moviesShown[0].Title) !== -1){
+            return
+        }
         moviesAddArray.push(moviesShown[0].Title)
         document.getElementById("movies-to-add").innerHTML = ""
-        console.log(moviesAddArray)
-        const titleArray = moviesAddArray.filter(function(item, index, array) {
-            return array.indexOf(item) === index;
-          })
-          console.log(titleArray); 
-          titleArray.forEach(movie => {
+        // console.log(moviesAddArray)
+        // const titleArray = moviesAddArray.filter(function(item, index, array) {
+        //     return array.indexOf(item) === index;
+        //   })
+        //   console.log(titleArray); 
+          moviesAddArray.forEach(movie => {
             document.getElementById("movies-to-add").innerHTML += `
             <li>${movie}</li>
             `
