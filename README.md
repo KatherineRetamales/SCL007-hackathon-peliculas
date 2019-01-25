@@ -101,7 +101,7 @@ En cuanto a la distribución del trabajo lo fuimos determinando de acuerdo a qui
 
 - (Día 3) Integración de la página que permite ver las listas ya creadas y su contenido con Firebase: **Ambas: Raquel y Katherine**
 
-- (Día 3) Revisión de la pagina, ver que todos los clicks mostrar e hicieran lo que tenian que mostar y hacer: **Katherine**
+- (Día 3) Revisión de la pagina, ver que todos los clicks mostraran e hicieran lo que tenian que mostar y hacer: **Katherine**
 
 - (Día 3) Corrección de los errores encontrados al revisar que todo funcionara correctamente: **Ambas: Raquel y Katherine**
 
