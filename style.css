@@ -81,3 +81,7 @@ i.material-icons.small.prefix {
 .top-margin {
     margin-top: 50px;
 }
+
+.justify-content {
+    justify-content: center;
+}

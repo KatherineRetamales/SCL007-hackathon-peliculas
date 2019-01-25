@@ -247,6 +247,12 @@ document.addEventListener("DOMContentLoaded", event => {
         document.getElementById("account-settings").style.display = "none";
         document.getElementById("movies-individual").style.display = "none";
         document.getElementById("list-create-section").style.display = "block";
+        document.getElementById("list-name").value = "";
+        document.getElementById("list-name").blur();
+        document.getElementById("search-list-section").value = "";
+        document.getElementById("movies2").innerHTML = "";
+        document.getElementById("movies-to-add").innerHTML = "";
+        document.getElementById("succesful-message").style.display = "none";
 
         document.getElementById("new-list").addEventListener("click", () => {
             console.log("funciona boton listas")
@@ -255,8 +261,9 @@ document.addEventListener("DOMContentLoaded", event => {
                 [listName]: moviesAddArray
             }))]
             Promise.all(saveList).then(()=>{
+            document.getElementById("list-create-section").style.display = "none";
             document.getElementById("succesful-message").style.display = "block";
-            document.getElementById("succesful-message").innerHTML = "Lista creada."
+            document.getElementById("succesful-message").innerHTML = `<h4 class="valign-wrapper justify-content top-margin">Lista creada<i class="material-icons medium green-text">check</i></h4>`
         })
         })
 
@@ -296,7 +303,7 @@ document.addEventListener("DOMContentLoaded", event => {
             <p>Intereses</p>
             </div>
             <div class="col s9">
-            <textarea id="hobbies" rows="20" class="settings-info" placeholder="Describenos tus intereses..">${window.snap.userHobbies ? window.snap.userHobbies : firebase.auth().currentUser.userHobbies}</textarea>
+            <textarea id="hobbies" rows="20" class="settings-info" placeholder="Describenos tus intereses..">${window.snap.userHobbies ? window.snap.userHobbies : ""}</textarea>
             </div>
             <div class="co s12 center">
             <button class="btn red" id="save-settings">Guardar Cambios</button>
@@ -311,7 +318,7 @@ document.addEventListener("DOMContentLoaded", event => {
                     userHobbies: userHobbies
                 }))]
                 Promise.all(promise).then(() => {
-                    document.getElementById("account-settings").innerHTML = `Información actualizada.<i class="material-icons medium red-text">check</i>`
+                    document.getElementById("account-settings").innerHTML = `<h4 class="valign-wrapper justify-content top-margin">Información actualizada.<i class="material-icons medium green-text">check</i></h4>`
                 })
             })
         })
@@ -347,6 +354,7 @@ document.addEventListener("DOMContentLoaded", event => {
             `
 
             document.getElementById("view-lists").addEventListener("click", userLists)
+            
         })
 
         
@@ -362,6 +370,7 @@ document.addEventListener("DOMContentLoaded", event => {
     
     
     function userLists() {
+        document.getElementById("lists-here").innerHTML = "";
         let currentLists = [];
         let promise = [(database.ref("users/"+firebase.auth().currentUser.uid).orderByKey().on("value", function(snapshot) {
             let postIds = Object.keys(snapshot.val().movieLists)
