@@ -350,7 +350,9 @@ document.addEventListener("DOMContentLoaded", event => {
             </ul>
     
             </div>
+            <div class="center">
             <button id="view-lists" class="btn red">Pulsa para ver tus listas</button>
+            </div>
             `
 
             document.getElementById("view-lists").addEventListener("click", userLists)
@@ -366,29 +368,29 @@ document.addEventListener("DOMContentLoaded", event => {
 
         })
     
-        function showCards(list){
-            let htmlString = "";
-            list.forEach(title => {
-                fetch("https://cors-anywhere.herokuapp.com/http://www.omdbapi.com/?t=" + title + "&plot=full&apikey=8b8cc00a")
-                    .then(data => data.json())
-                    .then(data=> {
-                        htmlString = htmlString + `
-                        <div class="col s12 m4 movie-card">
-                            <div class="card small center-align white">
-                                <div class="card-content white-text">
-                                    <img class="responsive-img card-poster" src="${data.Poster}">
-                                </div>
-                                <div class="card-action">
-                                    <a class="individual-movie-search" href="#">${data.Title}</a>
-                                </div>
-                            </div>
-                        </div>
+        // function showCards(list){
+        //     window.htmlString = "";
+        //     list.forEach(title => {
+        //         fetch("https://cors-anywhere.herokuapp.com/http://www.omdbapi.com/?t=" + title + "&plot=full&apikey=8b8cc00a")
+        //             .then(data => data.json())
+        //             .then(data=> {
+        //                 window.htmlString = htmlString + `
+        //                 <div class="col s12 m4 movie-card">
+        //                     <div class="card small center-align white">
+        //                         <div class="card-content white-text">
+        //                             <img class="responsive-img card-poster" src="${data.Poster}">
+        //                         </div>
+        //                         <div class="card-action">
+        //                             <a class="individual-movie-search" href="#">${data.Title}</a>
+        //                         </div>
+        //                     </div>
+        //                 </div>
                         
-                        `
-                    })
-            })
-            return htmlString
-        }
+        //                 `
+        //             })
+        //     })
+            // return htmlString
+        // }
     
     
     function userLists() {
@@ -402,11 +404,11 @@ document.addEventListener("DOMContentLoaded", event => {
           }))]
           Promise.all(promise).then(
               currentLists.forEach(list => {
-                  console.log(list[Object.keys(list)])
-                  document.getElementById("lists-here").innerHTML += `
+                    
+                    document.getElementById("lists-here").innerHTML += `
                   <li>
                   <div class="collapsible-header">${Object.keys(list)}</div>
-                  <div class="collapsible-body">${showCards(list[Object.keys(list)])}</div>
+                  <div class="collapsible-body">${list[Object.keys(list)].join("<br>")}</div>
                   </li>
                   `
                   window.M.AutoInit();
@@ -416,9 +418,11 @@ document.addEventListener("DOMContentLoaded", event => {
                         constrainWidth: false,
                         coverTrigger: false,
                         closeOnClick: false
-                    })
+                    })  
+                  } )
+                 
                   
-              })
+              
 
           )
 
@@ -459,3 +463,5 @@ document.addEventListener("DOMContentLoaded", event => {
 let snap;
 window.snap = snap;
 
+let htmlString = "";
+window.htmlString = htmlString;
