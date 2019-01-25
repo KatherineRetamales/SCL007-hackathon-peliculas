@@ -81,3 +81,11 @@ i.material-icons.small.prefix {
 .top-margin {
     margin-top: 50px;
 }
+
+.justify-content {
+    justify-content: center;
+}
+
+.collapsible-header {
+    background-color: #ebb16c;
+}
